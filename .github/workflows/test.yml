@@ -3,6 +3,7 @@ on:
   pull_request:
     branches:
       - master
+      - develop
 
 jobs:
   test:
@@ -14,3 +15,6 @@ jobs:
 
       - name: Test
         run: env
+
+      - name: Commitsar
+        uses: docker://commitsar/commitsar
