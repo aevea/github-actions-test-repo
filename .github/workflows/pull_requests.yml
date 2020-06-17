@@ -1,0 +1,21 @@
+name: PR
+on:
+  pull_request:
+    types: [created, edited, published, unpublished]
+    branches:
+      - master
+
+jobs:
+  test:
+    name: Trial
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Commitsar check
+        uses: docker://aevea/commitsar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
